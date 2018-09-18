@@ -1,19 +1,21 @@
-void circle(int length, int r, int g, int b)
+void circle(int length, int offsetX, int offsetY, int r, int g, int b)
 {
   for(int i = 0; i < 4; i++)
   {
     for(int j = 0; j < 3; j++)
     {
       fill(r, g, b);
-      ellipse(100 + 200 * i, 100 + 200 * j, length, length);
+      ellipse(100 + 200 * i + offsetX, 100 + 200 * j + offsetY, length, length);
     }
   }
 }
 
+int height = 600, width = 800;
+
 void setup()
 {
     size(800, 600);
-    background(255, 255, 255);
+    background(128, 128, 128);
     noStroke();
     randomSeed(0);
 }
@@ -21,8 +23,12 @@ void setup()
 
 void draw()
 {
-  for(int i = 200; i >= 0; i -= 10)
-  {
-    circle(i, (int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
-  }
+  float offsetX = (float)(mouseX - width/2) / (float)width;
+  float offsetY = (float)(mouseY - height/2) / (float)height;
+  
+  print("X:", mouseX, "y:", mouseY, '\n');
+  
+  circle(200, 0, 0, 255, 0, 0);
+  circle(100, (int)(20 * offsetX), (int)(20 * offsetY), 0, 255, 0); // small
+  circle(50, (int)(50 * offsetX), (int)(50 * offsetY), 0, 0, 255); // big
 }
