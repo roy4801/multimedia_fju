@@ -29,6 +29,6 @@ void draw()
   print("X:", mouseX, "y:", mouseY, '\n');
   
   circle(200, 0, 0, 255, 0, 0);
-  circle(100, (int)(20 * offsetX), (int)(20 * offsetY), 0, 255, 0); // small
-  circle(50, (int)(50 * offsetX), (int)(50 * offsetY), 0, 0, 255); // big
+  circle(100, (int)(30 * offsetX), (int)(20 * offsetY), 0, 255, 0); // big
+  circle(50, (int)(75 * offsetX), (int)(50 * offsetY), 0, 0, 255); // small
 }
