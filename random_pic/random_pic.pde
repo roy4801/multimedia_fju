@@ -65,6 +65,11 @@ boolean func()
             {
                 nowImageB--;
             }
+            else if(y >= 300 && y <= 300 + btnHeight)
+            {
+                save("random_pic.jpg");
+                println("Saved!");
+            }
             
             if(nowImageB > 20)
             {
@@ -97,11 +102,10 @@ void draw()
     if(!func())
     {
       //
-      print(nowImageF);
       String f = Integer.toString(nowImageF);
       String b = Integer.toString(nowImageB);
       
-      print(f);
+      // print(f + "\n");
       
       PImage imgFront = loadImage("image/" + f + "t.jpg");
       PImage imgBack = loadImage("image/" + b + "b.jpg");
