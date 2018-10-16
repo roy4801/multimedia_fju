@@ -1,66 +1,50 @@
-int num = 50;
-int[] x = new int[num];
-int[] y = new int[num];
+import processing.sound.*;
 
-class CircleColor
+SoundFile file;
+
+Counter [] ctList;
+
+Counter c;
+
+void setup()
 {
-	int r, g, b;
+    size(800, 600);
+    noStroke();
+    smooth();
+    frameRate(30);
+    randomSeed(0);
 
-	CircleColor()
-	{
-		r = g = b = 0;
-	}
+    // file = new SoundFile(this, "bg1.mp3");
+    // println("Channel= " + file.channels());
+    // println("Duration= " + file.duration() + " seconds");
+    // file.play();
 
-	void Rand()
-	{
-		r = (int)random(255);
-		g = (int)random(255);
-		b = (int)random(255);
-	}
+    c = new Counter();
+    c.setDuration(1000);
+    c.start();
 }
 
-CircleColor [] cir = new CircleColor[num];
+boolean timeCnt = true;
 
- void setup()
- {
-	 size(800, 600);
-	 noStroke();
-	 smooth();
-	 fill(255, 102);
-	 randomSeed(0);
+void draw()
+{
+    if(timeCnt)
+        println(millis());
+    
+    // Update
+    c.update();
 
-	 for(int i = 0; i < num; i++)
-	 {
-	 	cir[i] = new CircleColor();
-	 }
- }
 
- void draw()
- {
-	 background(0);
-	 // Shift the values to the right
-	 for (int i = num-1; i > 0; i--)
-	 {
-		 x[i] = x[i-1];
-		 y[i] = y[i-1];
-		 // cir[i] = cir[i-1];
-		 cir[i].r = cir[i-1].r;
-		 cir[i].g = cir[i-1].g;
-		 cir[i].b = cir[i-1].b;
-	 }
-	 // Add the new values to the beginning of the array
-	 x[0] = mouseX;
-	 y[0] = mouseY;
-	 
-	 // print("Rand: " + cir[0].r + " " + cir[0].g + " " + cir[0].b + "\n");
-	 cir[0].Rand();
+    // Draw
+    if(timeCnt && c.isOver())
+    {
+        println("The counter is over");
+        timeCnt = false;
+    }
 
-	 // Draw the circles
-	 for (int i = 0; i < num; i++)
-	 {
-	 	fill(cir[i].r, cir[i].g, cir[i].b);
-	 	// ellipse(x[i], y[i], i/2.0, i/2.0);
-	 	ellipse(x[i], y[i], 30, 10);
-	 	ellipse(x[i], y[i], 10, 30);
-	 }
- }
+
+    // if(keyPressed && key == 'p')
+    // {
+    //     file.play();
+    // }
+}
