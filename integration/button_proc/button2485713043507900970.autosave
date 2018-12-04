@@ -1,0 +1,29 @@
+import processing.serial.*;
+
+Serial port; // Create object from Serial class
+int val; // Data received from the serial port
+void setup() {
+	size(800, 600);
+	frameRate(10);
+	// Open the port that the board is connected to and use the same speed (9600 bps)
+	println(Serial.list()); 
+	String portName = Serial.list()[1]; 
+	//where 0 is dependent on the "com" port number.
+	background(0);
+
+	port = new Serial(this, portName, 9600);
+}
+void draw() {
+	if (0 < port.available()) { // If data is available,
+		val = port.read(); // read it and store it in val
+    println(val);
+	}
+	background(255); // Set background to white
+	fill(128);
+	if(val == 1)
+		fill(255, 0, 0);
+	if(val == 3)
+		fill(0, 255, 0);
+	rect(100, 100, 300, 100);
+	rect(400, 100, 300, 100);
+}
