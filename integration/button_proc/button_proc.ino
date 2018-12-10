@@ -1,15 +1,15 @@
-int buttonState1 = 0;
-int buttonState2 = 0;
 
-int switchPin1 = 7; // Switch connected to pin 4
-int switchPin2 = 8;
+// from left to right
+// idx 0 1 2 3
+int  btnPin[] = {7, 8, 9, 10};
+const int BTN_NUM = sizeof(btnPin)/sizeof(int);
+bool btnState[BTN_NUM];
 void setup()
 {
-    pinMode(switchPin1, INPUT);
-    pinMode(switchPin2, INPUT);// Set pin 0 as an input
+    for(int i = 0; i < BTN_NUM; i++)
+        pinMode(btnPin[i], INPUT);
     Serial.begin(9600); // Start serial communication at 9600 bps
 }
-
 
 #define DBG 0
 
@@ -17,35 +17,25 @@ void setup()
 bool need_zero = false;
 int prev;
 
-void loop() {
-    int i, j, k;
+void loop()
+{
+    for(int i = 0; i < BTN_NUM; i++)
+        btnState[i] = digitalRead(btnPin[i]);
 
-    buttonState1 = digitalRead(switchPin1);
-    buttonState2 = digitalRead(switchPin2);
-
-    // Serial.println(BIT(0));
-    // Serial.println(BIT(1));
     int payload = 0;
 
-        if (buttonState1 == HIGH)
+    for(int i = 0; i < BTN_NUM; i++)
+    {
+        if (btnState[i] == HIGH)
         {
-            payload |= BIT(0);
+            payload |= BIT(i);
             need_zero = true;
         }
         else
         {
-            payload &= ~BIT(0);
+            payload &= ~BIT(i);
         }
-
-        if (buttonState2 == HIGH)
-        {
-            payload |= BIT(1);
-            need_zero = true;
-        }
-        else
-        {
-            payload &= ~BIT(1);
-        }
+    }
 
     if(payload)
     {

@@ -56,13 +56,14 @@ void setup() {
 	size(800, 600);
 	frameRate(60);
 
-	println(Serial.list()); 
-	String portName = Serial.list()[1]; 
+	println(Serial.list());
+	String portName = Serial.list()[0];
 	println("PortName = " + portName);
 
 	background(0);
 
 	port = new Serial(this, portName, 9600);
+	port.clear();
 
 	blue = loadImage("blue.jpg");
 	purple = loadImage("purple.jpg");
@@ -91,21 +92,21 @@ void draw() {
 	if(end)
 		return;
 
-	if (0 < port.available())
+	if (port.available() > 0)
 		val = port.read();
-
+	// println("val = " + val);
 	background(255);
 	
 	fill(128);
 	// left
-	if(val == 2 || val == 3)
+	if(val == 1 || val == 3)
 	{
 		b1.hit();
 	}
 
 	fill(128);
 	// right
-	if(val == 1 || val == 3)
+	if(val == 2 || val == 3)
 	{
 		b2.hit();
 	}
@@ -128,6 +129,6 @@ void draw() {
 		end = true;
 	}
 
-	println("Ball 1 = " + b1.scale);
-	println("Ball 2 = " + b2.scale);
+	// println("Ball 1 = " + b1.scale);
+	// println("Ball 2 = " + b2.scale);
 }
