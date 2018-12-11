@@ -107,10 +107,10 @@ void draw()
       
       // print(f + "\n");
       
-      PImage imgFront = loadImage("image/" + "pic.jpg");
-      PImage imgBack = loadImage("image/" + b + "b.jpg");
+      PImage imgFront = loadImage("image/" + f + "t.jpg");
+      PImage imgBack = loadImage("image/" + "pic" + ".jpg");
       
-      image(imgFront, 0, 0,  500, 400);
-      image(imgBack, 0, 400, 500, 400);
+      image(imgFront, 0, 0);
+      image(imgBack, 0, 400);
     }
 }

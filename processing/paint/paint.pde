@@ -1,19 +1,11 @@
-
-int [] backgroundColor = {128, 128, 128};
+int [] backgroundColor = {255, 255, 255};
 int [] nowFillColor = {0, 0, 0};
 
 void drawText(String s, int x, int y, int r, int g, int b)
 {
   fill(r, g, b);
   text(s, x, y);
-  //fill(nowFillColor[0],nowFillColor[1], nowFillColor[2]);
 }
-
-//void drawRect(int x, int y, int w, int h, int r, int g, int b)
-//{
-//  fill(r, g, b);
-//  rect(x, y, w, h);
-//}
 
 void functionArea()
 {
@@ -27,7 +19,7 @@ void functionArea()
   // blue 2
   fill(0, 0, 255);
   rect(0, 200, 100, 100);// 100 300
-  // yellow 3 
+  // yellow 3
   fill(255, 255, 0);
   rect(0, 300, 100, 100); // 100, 400
   // cyan 4
@@ -82,14 +74,17 @@ void setup() {
     smooth();
     background(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
     functionArea();
+    noFill();
+    ellipse(400, 600, 200, 200);
     strokeWeight(8);
+
 }
 
 int nowColor;
 boolean picked = false;
 
 
-void draw() { 
+void draw() {
       // Judge choose color
       if(mousePressed && mouseButton == LEFT)
       {
@@ -203,6 +198,3 @@ void draw() {
         }
     }
 }
-
-
-//void set
